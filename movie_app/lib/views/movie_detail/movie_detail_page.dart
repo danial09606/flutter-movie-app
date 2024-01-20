@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/models/movie_list_response.dart';
-import 'package:movie_app/views/movie_detail/widgets/custom_list_view.dart';
+import 'package:movie_app/views/movie_detail/widgets/top_list_view.dart';
+import 'package:movie_app/network/endpoints.dart';
 
 class MovieDetailPage extends StatefulWidget {
   static const String routeName = '/movie-detail-page';
@@ -38,6 +39,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
       title: title,
       home: Scaffold(
         appBar: AppBar(
+          leading: BackButton(onPressed: () => Navigator.of(context).pop()),
           backgroundColor: Colors.white,
           centerTitle: true,
           title: const Text(
@@ -50,13 +52,24 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
         ),
         body: ListView(
           children: <Widget>[
+            TopViewCard(
+                imageURL: movieDetail.posterPath == null
+                    ? null
+                    : '${Endpoints.themovieDBImage}${movieDetail.posterPath}',
+                title:
+                    "${movieDetail.title} (${movieDetail.releaseDate?.split('-').first})",
+                language: movieDetail.originalLanguage),
+            SizedBox(height: 15),
             ListTile(
               title: Text('Overview',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   )),
-              subtitle: Text(movieDetail.overview ?? "No Data"),
+              subtitle: movieDetail.overview != ""
+                  ? Text(movieDetail.overview ?? "No Data")
+                  : Text(
+                      "TMDB don't have an overview translated in English. Help them expand their database by adding one."),
             ),
           ],
         ),

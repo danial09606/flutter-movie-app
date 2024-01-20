@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/views/movie_detail/widgets/custom_list_view.dart';
+import 'package:movie_app/widgets/custom_list_view.dart';
+import 'package:movie_app/extension/string_extension.dart';
+import 'package:movie_app/widgets/cached_image.dart';
 
 class TopViewCard extends StatelessWidget {
-  final String imageURL;
+  final String? imageURL;
   final String title;
   final String? genres;
   final String? language;
@@ -10,7 +12,7 @@ class TopViewCard extends StatelessWidget {
   const TopViewCard({
     super.key,
     required this.title,
-    required this.imageURL,
+    this.imageURL,
     this.genres,
     this.language,
   });
@@ -24,12 +26,8 @@ class TopViewCard extends StatelessWidget {
         fit: BoxFit.fill,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(12.0),
-          child: Image.network(
-            imageURL,
-            height: 100,
-            width: 100,
-            fit: BoxFit.fill,
-          ),
+          child: CachedImage(
+              url: imageURL, height: 100, width: 100, fit: BoxFit.fill),
         ),
       ),
       title: Text(
@@ -40,7 +38,7 @@ class TopViewCard extends StatelessWidget {
           fontWeight: FontWeight.bold,
         ),
       ),
-      subTitle: Text("${language} • ${genres} • ${}"),
+      subTitle: Text('${language?.getLanguage()} • ${genres ?? 'N/A'}'),
     );
   }
 }
