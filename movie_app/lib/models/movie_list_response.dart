@@ -6,6 +6,11 @@ part 'movie_list_response.g.dart';
 List<MovieData> movieListFromJson(String str) =>
     List<MovieData>.from(json.decode(str).map((x) => MovieParent.fromJson(x)));
 
+MovieData movieFromJson(String str) {
+  final decodedJson = jsonDecode(str);
+  return MovieData.fromJson(decodedJson);
+}
+
 @HiveType(typeId: 0)
 class MovieParent {
   @HiveField(0)
@@ -84,25 +89,39 @@ class MovieData {
   num? voteAverage;
   @HiveField(13)
   num? voteCount;
+  @HiveField(14)
+  String? tagline;
+  @HiveField(15)
+  num? runtime;
+  @HiveField(16)
+  List<dynamic>? genres;
+  @HiveField(17)
+  List<dynamic>? spokenLanguages;
+  @HiveField(18)
+  num? revenue;
 
-  MovieData({
-    this.adult,
-    this.backdropPath,
-    this.genreIds,
-    this.id,
-    this.originalLanguage,
-    this.originalTitle,
-    this.overview,
-    this.popularity,
-    this.posterPath,
-    this.releaseDate,
-    this.title,
-    this.video,
-    this.voteAverage,
-    this.voteCount,
-  });
+  MovieData(
+      {this.adult,
+      this.backdropPath,
+      this.genreIds,
+      this.id,
+      this.originalLanguage,
+      this.originalTitle,
+      this.overview,
+      this.popularity,
+      this.posterPath,
+      this.releaseDate,
+      this.title,
+      this.video,
+      this.voteAverage,
+      this.voteCount,
+      this.tagline,
+      this.runtime,
+      this.genres,
+      this.spokenLanguages,
+      this.revenue});
 
-  factory MovieData.fromJson(Map<dynamic, dynamic> json) {
+  factory MovieData.fromJson(Map<String, dynamic> json) {
     return MovieData(
       adult: json['adult'] as bool?,
       backdropPath: json['backdrop_path'] as String?,
@@ -118,10 +137,15 @@ class MovieData {
       video: json['video'] as bool?,
       voteAverage: json['vote_average'] as num?,
       voteCount: json['vote_count'] as num?,
+      tagline: json['tagline'] as String?,
+      runtime: json['runtime'] as num?,
+      genres: json['genres'] as List<dynamic>?,
+      spokenLanguages: json['spoken_languages'] as List<dynamic>?,
+      revenue: json['revenue'] as num?,
     );
   }
 
-  Map<dynamic, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         'adult': adult,
         'backdropPath': backdropPath,
         'genreIds': genreIds,
@@ -136,6 +160,11 @@ class MovieData {
         'video': video,
         'voteAverage': voteAverage,
         'voteCount': voteCount,
+        'tagline': tagline,
+        'runtime': runtime,
+        'genres': genres,
+        'spokenLanguages': spokenLanguages,
+        'revenue': revenue,
       };
 
   MovieData copyWith({
@@ -153,6 +182,11 @@ class MovieData {
     bool? video,
     num? voteAverage,
     num? voteCount,
+    String? tagline,
+    num? runtime,
+    List<dynamic>? genres,
+    List<String>? spokenLanguages,
+    num? revenue,
   }) {
     return MovieData(
       adult: adult ?? this.adult,
@@ -169,6 +203,11 @@ class MovieData {
       video: video ?? this.video,
       voteAverage: voteAverage ?? this.voteAverage,
       voteCount: voteCount ?? this.voteCount,
+      tagline: tagline ?? this.tagline,
+      runtime: runtime ?? this.runtime,
+      genres: genres ?? this.genres,
+      spokenLanguages: spokenLanguages ?? this.spokenLanguages,
+      revenue: revenue ?? this.revenue,
     );
   }
 }

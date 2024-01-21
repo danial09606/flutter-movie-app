@@ -11,4 +11,11 @@ class MoviesRepository {
     return Response(movieListFromJson(response.body), response.statusCode,
         response.headers);
   }
+
+  Future<Response<MovieData>> getMoviesDetails(num movieId) async {
+    final Response response = await _helper.get(
+        '${Endpoints.baseURL}movie/$movieId?api_key=${EndpointKeys.movieDBAPIKey}');
+    return Response(
+        movieFromJson(response.body), response.statusCode, response.headers);
+  }
 }
