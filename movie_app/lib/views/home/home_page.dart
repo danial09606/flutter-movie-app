@@ -72,14 +72,15 @@ class _HomePageState extends State<HomePage> {
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
-              Navigator.pushNamed(
-                context,
-                MovieDetailPage.routeName,
-                arguments: MovieDetailPageArgs(
-                  movieDetail: _bloc.movieList[index],
-                  index: index,
-                ),
-              );
+              if (_bloc.movieList[index].id != null) {
+                Navigator.pushNamed(
+                  context,
+                  MovieDetailPage.routeName,
+                  arguments: MovieDetailPageArgs(
+                    movieId: _bloc.movieList[index].id ?? 0,
+                  ),
+                );
+              }
             },
             child: MovieCard(
               movie: _bloc.movieList[index],

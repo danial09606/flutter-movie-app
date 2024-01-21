@@ -74,13 +74,18 @@ class MovieDataAdapter extends TypeAdapter<MovieData> {
       video: fields[11] as bool?,
       voteAverage: fields[12] as num?,
       voteCount: fields[13] as num?,
+      tagline: fields[14] as String?,
+      runtime: fields[15] as num?,
+      genres: (fields[16] as List?)?.cast<dynamic>(),
+      spokenLanguages: (fields[17] as List?)?.cast<dynamic>(),
+      revenue: fields[18] as num?,
     );
   }
 
   @override
   void write(BinaryWriter writer, MovieData obj) {
     writer
-      ..writeByte(14)
+      ..writeByte(19)
       ..writeByte(0)
       ..write(obj.adult)
       ..writeByte(1)
@@ -108,7 +113,17 @@ class MovieDataAdapter extends TypeAdapter<MovieData> {
       ..writeByte(12)
       ..write(obj.voteAverage)
       ..writeByte(13)
-      ..write(obj.voteCount);
+      ..write(obj.voteCount)
+      ..writeByte(14)
+      ..write(obj.tagline)
+      ..writeByte(15)
+      ..write(obj.runtime)
+      ..writeByte(16)
+      ..write(obj.genres)
+      ..writeByte(17)
+      ..write(obj.spokenLanguages)
+      ..writeByte(18)
+      ..write(obj.revenue);
   }
 
   @override

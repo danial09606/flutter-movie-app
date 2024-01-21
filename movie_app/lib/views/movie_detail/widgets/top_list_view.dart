@@ -8,6 +8,7 @@ class TopViewCard extends StatelessWidget {
   final String title;
   final String? genres;
   final String? language;
+  final String? duration;
 
   const TopViewCard({
     super.key,
@@ -15,6 +16,7 @@ class TopViewCard extends StatelessWidget {
     this.imageURL,
     this.genres,
     this.language,
+    this.duration,
   });
 
   @override
@@ -38,7 +40,8 @@ class TopViewCard extends StatelessWidget {
           fontWeight: FontWeight.bold,
         ),
       ),
-      subTitle: Text('${language?.getLanguage()} • ${genres ?? 'N/A'}'),
+      subTitle: Text(
+          '${language?.getLanguage()} • ${genres == "" ? 'N/A' : genres} • ${duration == "" ? 'N/A' : duration}'),
     );
   }
 }

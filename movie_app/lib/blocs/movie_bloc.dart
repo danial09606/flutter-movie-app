@@ -12,13 +12,19 @@ class MovieBloc extends BaseBloc {
   final MoviesRepository _repo = MoviesRepository();
   final StreamController<ApiResponse<List<MovieData>>> _scMoviesList =
       StreamController<ApiResponse<List<MovieData>>>();
+
+  final StreamController<ApiResponse<MovieData>> _scMoviesData =
+      StreamController<ApiResponse<MovieData>>();
+
   final StreamController<ApiResponse<List<MovieData>>> _scRequestNextPage =
       StreamController<ApiResponse<List<MovieData>>>();
 
   StreamSink<ApiResponse<List<MovieData>>> get moviesListSink =>
       _scMoviesList.sink;
+  StreamSink<ApiResponse<MovieData>> get moviesDataSink => _scMoviesData.sink;
   Stream<ApiResponse<List<MovieData>>> get moviesListStream =>
       _scMoviesList.stream;
+  Stream<ApiResponse<MovieData>> get moviesDataStream => _scMoviesData.stream;
 
   StreamSink<ApiResponse<List<MovieData>>> get requestNextPageSink =>
       _scRequestNextPage.sink;
@@ -30,7 +36,11 @@ class MovieBloc extends BaseBloc {
 
   final List<MovieData> _movieList = [];
 
+  MovieData _movieData = MovieData();
+
   List<MovieData> get movieList => _movieList;
+
+  MovieData get movieData => _movieData;
 
   int pageNumber = 1;
   bool hasNextPage = true;
@@ -87,6 +97,14 @@ class MovieBloc extends BaseBloc {
     }
   }
 
+  void getMovieDetail(
+      StreamSink<ApiResponse<MovieData>> sink, num movieId) async {
+    sink.add(ApiResponse.loading());
+    final Response<MovieData> response = await _repo.getMoviesDetails(movieId);
+    _movieData = response.body;
+    sink.add(ApiResponse.completed(null));
+  }
+
   void getInitialMoviesList() async {
     getMovieList(moviesListSink, true);
   }
@@ -95,9 +113,14 @@ class MovieBloc extends BaseBloc {
     getMovieList(requestNextPageSink);
   }
 
+  void requestMovieDetail(num movieId) async {
+    getMovieDetail(moviesDataSink, movieId);
+  }
+
   @override
   void dispose() {
     _scMoviesList.close();
+    _scMoviesData.close();
     _scRequestNextPage.close();
     _scrollController.dispose();
     Hive.close();
