@@ -2,10 +2,10 @@
 
 ### Overview
 
-<p float="left">
-    <img src="https://github.com/danial09606/flutter-movie-app/blob/main/images/home_page.png" width="33%">
-    <img src="https://github.com/danial09606/flutter-movie-app/blob/main/images/movie_detail_page_1.png" width="33%">
-    <img src="https://github.com/danial09606/flutter-movie-app/blob/main/images/movie_detail_page_2.png" width="33%">
+<p float="center">
+    <img src="https://github.com/danial09606/flutter-movie-app/blob/main/images/home_page.png" width="30%">
+    <img src="https://github.com/danial09606/flutter-movie-app/blob/main/images/movie_detail_page_1.png" width="30%">
+    <img src="https://github.com/danial09606/flutter-movie-app/blob/main/images/movie_detail_page_2.png" width="30%">
 </p>
 
 Movie Walaweh app is the app that show user lists of movies released in 2016 (01-01-2016 - 30-12-2016). Users can obtained all the details of the movie such as language, duration, overview, rating and etc. Sources of the data are coming from TMDB's API.
