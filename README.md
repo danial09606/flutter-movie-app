@@ -2,11 +2,11 @@
 
 ### Overview
 
-![Alt text](https://github.com/danial09606/flutter-movie-app/blob/main/images/home_page.png)
-
-![Alt text](https://github.com/danial09606/flutter-movie-app/blob/main/images/movie_detail_page_1.png)
-
-![Alt text](https://github.com/danial09606/flutter-movie-app/blob/main/images/movie_detail_page_2.png)
+<p float="left">
+    <img src="https://github.com/danial09606/flutter-movie-app/blob/main/images/home_page.png" width="33%">
+    <img src="https://github.com/danial09606/flutter-movie-app/blob/main/images/movie_detail_page_1.png" width="33%">
+    <img src="https://github.com/danial09606/flutter-movie-app/blob/main/images/movie_detail_page_2.png" width="33%">
+</p>
 
 Movie Walaweh app is the app that show user lists of movies released in 2016 (01-01-2016 - 30-12-2016). Users can obtained all the details of the movie such as language, duration, overview, rating and etc. Sources of the data are coming from TMDB's API.
 
@@ -19,6 +19,8 @@ This app is for my learning flutter purposes
 - **Get Movie Image:** https://image.tmdb.org/t/p/w500/:image_path:
 
 ### Architecture
+
+In this project, I use Block architecture.
 
 ![Alt text](https://github.com/danial09606/flutter-movie-app/blob/main/images/bloc_architecture.png)
 
